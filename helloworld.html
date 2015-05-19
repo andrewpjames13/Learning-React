@@ -18,12 +18,19 @@
     </script>
 
     <script>
+      // var App = React.createClass({
+      //   render:function(){
+      //     return React.DOM.h1(null,"Hi there")
+      //   }
+      // });
+      // React.render(App(), document.body);
+
       var App = React.createClass({
         render:function(){
-          return React.DOM.h1(null,"Hi there")
+          return React.createElement("h1", null, "Yo")
         }
       });
-      React.render(App(), document.body);
+      React.render(React.createElement(App), document.body);
     </script>
   </body>
 </html>
