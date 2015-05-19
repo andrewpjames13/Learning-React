@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="build/react.js"></script>
+    <script src="http://fb.me/react-0.12.2.js"></script>
     <script src="build/JSXTransformer.js"></script>
   </head>
   <body>
     <div id="example"></div>
     <script type="text/jsx">
-    var App = React.createClass({
-      render:function(){
-        return <h1>Hello World</h1>
-      }
-    });
-      React.render(
-        <App />, document.body
-      );
+    // var App = React.createClass({
+    //   render:function(){
+    //     return <h1>Hello World</h1>
+    //   }
+    // });
+    //   React.render(
+    //     <App />, document.body
+    //   );
+    </script>
+
+    <script>
+      var App = React.createClass({
+        render:function(){
+          return React.DOM.h1(null,"Hi there")
+        }
+      });
+      React.render(App(), document.body);
     </script>
   </body>
 </html>
