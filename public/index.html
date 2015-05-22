@@ -13,6 +13,8 @@
     <div id="content"></div>
     <div id="react_demo"></div>
     <div id="timer"></div>
+    <div id="todo_app">  </div>
+    <div id="quiz_app">  </div>
 
     <script type="text/jsx">
 
@@ -170,7 +172,88 @@
     var mountNode = document.getElementById('timer')
     React.render(<Timer />, mountNode);
 
-    // 
+    // todo listComponent 3
+    var TodoList = React.createClass({
+      render: function() {
+        var createItem = function(itemText, index) {
+          return <li key={index + itemText}>{itemText}</li>;
+        };
+        return <ul>{this.props.items.map(createItem)}</ul>;
+      }
+    });
+    var TodoApp = React.createClass({
+      getInitialState: function() {
+        return {items: [], text: ''};
+      },
+      onChange: function(e) {
+        this.setState({text: e.target.value});
+      },
+      handleSubmit: function(e) {
+        e.preventDefault();
+        var nextItems = this.state.items.concat([this.state.text]);
+        var nextText = '';
+        this.setState({items: nextItems, text: nextText});
+      },
+      render: function() {
+        return (
+          <div>
+            <h3>TODO</h3>
+            <TodoList items={this.state.items} />
+            <form onSubmit={this.handleSubmit}>
+              <input onChange={this.onChange} value={this.state.text} />
+              <button>{'Add #' + (this.state.items.length + 1)}</button>
+            </form>
+          </div>
+        );
+      }
+    });
+
+    React.render(<TodoApp />, document.getElementById("todo_app"));
+
+    //Quiz App
+    var QuizApp = React.createClass({
+      render: function(){
+        return(
+        <div>
+          <Question />
+        </div>
+        )
+      }
+    });
+
+    var Question = React.createClass({
+      getInitialState: function(){
+        return{answer:"Josh", userAnswer:""};
+      },
+      onChange: function(e){
+        this.setState({userAnswer: e.target.value})
+      },
+      handleSubmit: function(e){
+        e.preventDefault();
+        if(this.state.answer === this.state.userAnswer){
+          console.log('Correct');
+        }else{
+          console.log('Wrong');
+      }
+      },
+      render: function(){
+        return(
+        <div>
+        <h1>Whats your name?</h1>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" onChange={this.onChange} value={this.state.userAnswer} placeholder="Your Name"/>
+          <input type="submit" value="Enter"/>
+        </form>
+
+        </div>
+        )
+      }
+    });
+
+    React.render(
+      <QuizApp />,
+      document.getElementById("quiz_app")
+    );
     </script>
   </body>
 </html>
