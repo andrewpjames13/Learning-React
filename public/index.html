@@ -223,14 +223,14 @@
 
     var Question = React.createClass({
       getInitialState: function(){
-        return{answer:"Josh", userAnswer:""};
+        return{answer:["Josh", "Andrew"], userAnswer:""};
       },
       onChange: function(e){
         this.setState({userAnswer: e.target.value})
       },
       handleSubmit: function(e){
         e.preventDefault();
-        if(this.state.answer === this.state.userAnswer){
+        if(this.state.answer[0] || this.state.answer[1] === this.state.userAnswer){
           console.log('Correct');
         }else{
           console.log('Wrong');
