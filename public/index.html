@@ -212,10 +212,16 @@
 
     //Quiz App
     var QuizApp = React.createClass({
+      getInitialState: function(){
+        return{questions: [{question: "Kind of Dog?", answer: "Poodle"},{question:"Coding with?", answer:"React"}]}
+      },
       render: function(){
+        var createQuestion = function(question, index){
+          return <Question key={index} question = {question.question} answer = {question.answer}/>
+        }
         return(
         <div>
-          <Question />
+          {this.state.questions.map(createQuestion)}
         </div>
         )
       }
@@ -223,28 +229,29 @@
 
     var Question = React.createClass({
       getInitialState: function(){
-        return{answer:["Josh", "Andrew"], userAnswer:""};
+        console.log(this.props.answer);
+        return{answer: this.props.answer, userAnswer:"", result:""};
       },
       onChange: function(e){
         this.setState({userAnswer: e.target.value})
       },
       handleSubmit: function(e){
         e.preventDefault();
-        if(this.state.answer[0] || this.state.answer[1] === this.state.userAnswer){
-          console.log('Correct');
+        if(this.state.answer === this.state.userAnswer){
+          this.setState({result: "Correct"});
         }else{
-          console.log('Wrong');
+          this.setState({result: "Wrong"});
       }
       },
       render: function(){
         return(
         <div>
-        <h1>Whats your name?</h1>
+        <h1>{this.props.question}</h1>
         <form onSubmit={this.handleSubmit}>
           <input type="text" onChange={this.onChange} value={this.state.userAnswer} placeholder="Your Name"/>
           <input type="submit" value="Enter"/>
         </form>
-
+        <div id="result">{this.state.result}</div>
         </div>
         )
       }
