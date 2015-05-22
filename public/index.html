@@ -11,6 +11,8 @@
   </head>
   <body>
     <div id="content"></div>
+    <div id="react_demo"></div>
+
     <script type="text/jsx">
 
     var CommentBox = React.createClass({
@@ -129,6 +131,23 @@
       <CommentBox url="comments.json" pollInterval={2000}/>,
       document.getElementById('content')
     );
+
+
+    //React tutorial with Bobby
+
+    //Saying Hello
+    var HelloMessage = React.createClass({
+      render: function() {
+        return <div>Hello {this.props.firstName} {this.props.lastName}</div>;
+      }
+    });
+
+    var mountNode = document.getElementById('react_demo')
+
+    React.render(<HelloMessage firstName="John" lastName="Smith" />, mountNode);
+
+    
+
     </script>
   </body>
 </html>
