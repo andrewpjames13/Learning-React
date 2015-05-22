@@ -12,6 +12,7 @@
   <body>
     <div id="content"></div>
     <div id="react_demo"></div>
+    <div id="timer"></div>
 
     <script type="text/jsx">
 
@@ -33,7 +34,6 @@
         var comments = this.state.data;
         var newComments = comments.concat([comment]);
         this.setState({data: newComments});
-        debugger;
         $.ajax({
               url: this.props.url,
               dataType: 'json',
@@ -135,7 +135,7 @@
 
     //React tutorial with Bobby
 
-    //Saying Hello
+    //Saying Hello Component 1
     var HelloMessage = React.createClass({
       render: function() {
         return <div>Hello {this.props.firstName} {this.props.lastName}</div>;
@@ -146,8 +146,31 @@
 
     React.render(<HelloMessage firstName="John" lastName="Smith" />, mountNode);
 
-    
+    //Timer Component 2
+    var Timer = React.createClass({
+      getInitialState: function() {
+        return {secondsElapsed: 0};
+      },
+      tick: function() {
+        this.setState({secondsElapsed: this.state.secondsElapsed + 1});
+      },
+      componentDidMount: function() {
+        this.interval = setInterval(this.tick, 1000);
+      },
+      componentWillUnmount: function() {
+        clearInterval(this.interval);
+      },
+      render: function() {
+        return (
+          <div>Seconds Elapsed: {this.state.secondsElapsed}</div>
+        );
+      }
+    });
 
+    var mountNode = document.getElementById('timer')
+    React.render(<Timer />, mountNode);
+
+    // 
     </script>
   </body>
 </html>
